@@ -1,394 +1,451 @@
-<!-- app/pages/index.vue -->
 <template>
   <NuxtLayout>
-    <main class="page-container">
-      
-      <!-- HERO -->
-      <header id="about" class="whiteboard">
-        <p class="subtitle">Software Engineer | Aspiring MOE Teacher</p>
-        <h1>Hello, I'm Sam Lah.</h1>
-        <p class="bio">
-          I am a first-class honors Computer Science graduate and a current Salesforce Engineer at Ufinity Pte Ltd. However, my true north has always been teaching. For years, I have balanced high-level technical engineering with active teaching, sports coaching, and music instruction. My long-term aspiration is to bring this rare blend of industry logic, sports discipline, and artistic patience into a full-time classroom.
-        </p>
-
-        <!-- Terminal -->
-        <div class="terminal">
-          <div class="term-bar">
-            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-            <span class="term-title">samlah@laptop:~$</span>
-          </div>
-          <div class="term-content">
-            <p><span class="prmpt">➜</span> <span class="cmd">cat contact_details.txt</span></p>
-            <p class="out">Phone: +65 94563996 | Email: samlah48@yahoo.com.sg</p>
-            <p><span class="prmpt">➜</span> <span class="cmd">npm run current-stack</span></p>
-            <p class="out highlight">[v] Nuxt.js, Springboot, Salesforce, Math Pedagogy, Badminton, & Grade 7 Piano</p>
-          </div>
-        </div>
-      </header>
-
-      <!-- VISITOR COUNTER -->
-      <section class="sticky-note">
-        <p v-if="!pending">You are visitor number <span>#{{ data?.count }}</span> on my portfolio today. Welcome.</p>
-        <p v-else>Taking attendance...</p>
-      </section>
-
-      <!-- PASSION NARRATIVE -->
-      <section id="philosophy" class="narrative-section">
-        <h2>A Lifelong Passion for Teaching</h2>
-        <div class="text-bubble">
-          <p>
-           Everytime I explain about my ambition of chasing my dreams and become what I think my calling in life is, people always ask me why not stick to something you are already good at and have years of experience in, which is coding?
-          </p>
-          <p style="margin-top: 10px;">
-           The reason is very simple and down to earth actually. I believe that everyone and everything is born on planet earth for a purpose. After years of coaching/tutoring, I am glad to say that I have found my purpose and my true calling in life - To serve and to inspire.
-          </p>
-          <p style="margin-top: 10px;">
-            Many people view my background as a pivot from tech to teaching, but the reality is that teaching has been my parallel constant. I started coaching badminton back in 2018, and I have previously guided students through music theory and practicals as a piano teacher. 
-          </p>
-          <p style="margin-top: 10px;">
-            Over the years, working with children and adults alike taught me that the joy of a breakthrough is the ultimate reward. Whether it is correcting a physical stroke on the court, guiding a student through Grade 7 piano sheet music, or breaking down a complex P1 to P6 mathematics problem, my fulfillment comes from seeing a student's confidence take flight.
-          </p>
-          <p style="margin-top: 10px;">
-            In my software engineering career, I build systems to solve enterprise problems. But in education, I get to help human beings solve their own blocks. I am passionate about taking the highly structured, logical, and patient frameworks I use in tech and applying them to the classroom to shape the next generation of critical thinkers.
-          </p>
-        </div>
-
-        <!-- FIVE BLOCK GRID -->
-        <div class="narrative-grid five-blocks">
-          <div class="block dev-block">
-            <h3>Technical Pedagogy</h3>
-            <p>Working with code has significantly improved my logical thinking. I often use this skill to break down mathematical concepts for my students and guide them toward logical, structured thinking.</p>
-          </div>
-
-          <div class="block edu-block">
-            <h3>Coaching and Mentorship</h3>
-            <p>With years of badminton coaching experience at BG Academy and Extreme Badminton Academy, I have mastered student engagement, mental discipline, and lesson planning that caters to varying physical and cognitive paces.</p>
-          </div>
-
-          <div class="block tutor-block">
-            <h3>Tutoring</h3>
-            <p>Teaching P1 to P6 mathematics at Nanyang Educational Consultancy has honed my ability to simplify abstract concepts. I design personalized lesson plans that bridge understanding gaps, driving visible grade improvements while keeping young learners engaged and motivated.</p>
-          </div>
-
-          <div class="block music-block">
-            <h3>Music (Piano)</h3>
-            <p>I have reached Grade 7 in Piano and have taught students in the past.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- BADMINTON COACHING VIDEOS -->
-      <section id="coaching-vids" class="narrative-section">
-        <h2>Tutoring in Action</h2>
-        <p>Short clip of me in action.</p>
+    <div :class="{ 'dark-mode': isDark }" class="theme-wrapper">
+      <main class="page-container">
         
-        <div class="video-grid">
-          <!-- Video Card 1 -->
-          <div class="video-card">
-            <div class="video-wrapper">
-              <video controls preload="metadata" class="native-player">
+        <div class="top-nav">
+          <div class="status-chip">
+            <span class="pulse"></span> Current Role: Salesforce Engineer @ Ufinity
+          </div>
+          <button @click="toggleDarkMode" class="theme-btn">
+            {{ isDark ? '💡 LIGHTS ON' : '🌑 LIGHTS OFF' }}
+          </button>
+        </div>
+
+        <!-- HERO / WHITEBOARD -->
+        <header id="about" class="whiteboard">
+          <div class="tape-piece top-left"></div>
+          <div class="tape-piece top-right"></div>
+          
+          <p class="subtitle">Software Engineer // Aspiring Educator</p>
+          <h1 class="main-title">Sam Lah.</h1>
+          
+          <div class="hero-content">
+            <p class="bio">
+              First-class honors CS graduate bridging the gap between 
+              <span class="highlight-yellow">high-level engineering</span> and 
+              <span class="highlight-red">active pedagogy</span>. 
+            </p>
+          </div>
+
+          <div class="terminal">
+            <div class="term-bar">
+              <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+              <span class="term-title">samlah@laptop:~$ contact</span>
+            </div>
+            <div class="term-content">
+              <p><span class="term-label">PHONE:</span> +65 94563996</p>
+              <p><span class="term-label">EMAIL:</span> samlah48@yahoo.com.sg</p>
+            </div>
+          </div>
+        </header>
+
+        <!-- VISITOR COUNT -->
+        <section class="sticky-note">
+          <div class="pin"></div>
+          <p v-if="!countPending">Class Attendance: <span>{{ countData?.count }}</span></p>
+          <p v-else>Taking attendance...</p>
+        </section>
+
+       <!-- CAREER & EDUCATION ROADMAP -->
+<section id="experience" class="narrative-section">
+  <h2 class="section-heading">Educational & Professional Roadmap</h2>
+  
+  <div class="timeline-container">
+    <!-- CURRENT ROLE -->
+    <div class="timeline-item current">
+      <div class="marker"></div>
+      <div class="timeline-content block">
+        <span class="date-tag">Dec 2025 – Present</span>
+        <h3>Salesforce Engineer @ Ufinity Pte Ltd</h3>
+        <p>Developing cloud solutions and supporting the maintenance of MOE's <strong>Student Learning Space (SLS)</strong> ecosystem.</p>
+      </div>
+    </div>
+
+    <!-- RECENT WORK & TEACHING -->
+    <div class="timeline-item">
+      <div class="marker"></div>
+      <div class="timeline-content block">
+        <span class="date-tag">Jan 2025 – Present</span>
+        <h3>Math & English Tutor @ Nanyang Educational Consultancy</h3>
+        <p>Personalized coaching for P1-P6 students. Focused on grade improvement through logical deconstruction of math concepts.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="marker"></div>
+      <div class="timeline-content block">
+        <span class="date-tag">Feb 2024 – Dec 2025</span>
+        <h3>Full Stack Developer @ Real Estate Analytics</h3>
+        <p>Built API logic and data platforms using Nuxt.js, Springboot, and Python. Led product feature development and chatbot projects.</p>
+      </div>
+    </div>
+
+    <!-- INTERNSHIP: ACP -->
+    <div class="timeline-item intern">
+      <div class="marker"></div>
+      <div class="timeline-content block">
+        <span class="date-tag">June 2023 – Sept 2023</span>
+        <h3>Mobile Software Developer Intern @ ACP Group</h3>
+        <p>Sole mobile developer for the MyQueen app, built from scratch using Flutter and Firebase. Resolved critical performance bugs for the group.</p>
+      </div>
+    </div>
+
+    <!-- UNIVERSITY -->
+    <div class="timeline-item academic">
+      <div class="marker"></div>
+      <div class="timeline-content block">
+        <span class="date-tag">Oct 2021 – Dec 2023</span>
+        <h3>BSc Computer Science @ University of London</h3>
+        <p>Graduated with <strong>First Class Honors</strong>. Specialized in Web Programming and Mobile Development.</p>
+      </div>
+    </div>
+
+    <!-- INTERNSHIP: MAS -->
+    <div class="timeline-item intern">
+      <div class="marker"></div>
+      <div class="timeline-content block">
+        <span class="date-tag">Feb 2018 – Aug 2018</span>
+        <h3>Data Analyst Intern @ Monetary Authority of Singapore</h3>
+        <p>Assisted in collecting and visualizing data to derive insights for MAS decision-making processes.</p>
+      </div>
+    </div>
+
+    <!-- POLYTECHNIC -->
+    <div class="timeline-item poly">
+      <div class="marker"></div>
+      <div class="timeline-content block">
+        <span class="date-tag">Apr 2016 – Mar 2020</span>
+        <h3>Diploma @ Republic Polytechnic</h3>
+        <p>Technical engineering foundation. Served as <strong>Vice-Captain of the Badminton Team</strong>; led the team to a historic <strong>Double Gold</strong> for both Men and Women in 2018.</p>
+      </div>
+    </div>
+
+    <!-- SECONDARY SCHOOL -->
+    <div class="timeline-item secondary">
+      <div class="marker"></div>
+      <div class="timeline-content block">
+        <span class="date-tag">Jan 2012 – Dec 2015</span>
+        <h3>GCE O-Levels @ Shuqun Secondary School</h3>
+        <p>Graduated with O-Level certification. Served as <strong>Captain of the Badminton Team</strong>, establishing early leadership and discipline.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+        <!-- MISSION & GRID -->
+        <section id="philosophy" class="narrative-section">
+          <h2 class="section-heading">The Mission</h2>
+          <div class="text-bubble">
+            <p>
+              Teaching has been my constant. From coaching badminton since 2018 to Grade 7 piano and P1-P6 Math tutoring, 
+              I find my fulfillment in the "breakthrough"—helping a student debug their own logic.
+            </p>
+          </div>
+
+          <div class="narrative-grid">
+            <div class="block dev-block">
+              <div class="block-tag">ENGINEERING</div>
+              <h3>Technical Pedagogy</h3>
+              <p>Applying code-based logic to deconstruct complex Math problems for primary students.</p>
+            </div>
+            <div class="block edu-block">
+              <div class="block-tag">SPORTS</div>
+              <h3>Coaching</h3>
+              <p>6 years of badminton coaching (BG & Extreme Academy). Mastery in discipline and mental agility.</p>
+            </div>
+            <div class="block tutor-block">
+              <div class="block-tag">ACADEMIC</div>
+              <h3>Tutoring</h3>
+              <p>Over a year at Nanyang Consultancy (Math/English) and SAM (Seriously Addictive Mathematics). Focused on logic-driven grade jumps.</p>
+            </div>
+            <div class="block music-block">
+              <div class="block-tag">ARTS</div>
+              <h3>Music</h3>
+              <p>Freelance Grade 1-2 Piano Teacher. Instilling the technical patience required for artistic mastery.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIDEOS -->
+        <section class="narrative-section">
+          <h2 class="section-heading">Coaching Drills</h2>
+          <div class="video-grid">
+            <div class="video-card block">
+              <div class="video-wrapper">
+                <video controls preload="metadata" class="native-player">
+                  <!-- Correct Pathing -->
                 <source src="/videos/smash-drill.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-            <div class="video-info">
-              <h4>Math Tutoring</h4>
-              <p>With one of my math students.</p>
-            </div>
-          </div>
-
-          <!-- Video Card 2 -->
-          <div class="video-card empty-card">
-            <div class="placeholder-box">
-              <span>Next clip coming soon...</span>
-            </div>
-            <div class="video-info">
-              <h4>Deception & Drop Shots</h4>
-              <p>Footage of tactical placement drills will be displayed here soon.</p>
+                </video>
+              </div>
+              <div class="video-info">
+                <h4>Smash & Recovery</h4>
+                <p>Developing muscle memory through multi-shuttle high-intensity drills.</p>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- RESUME TIMELINE -->
-      <section id="experience" class="narrative-section">
-        <h2>Professional Timeline</h2>
-        
-        <!-- TEACHING EXPERIENCE -->
-        <div class="timeline-group">
-          <div class="marker-title edu-marker">Teaching, Coaching, & Music</div>
-          
-          <div class="block timeline-item edu-item">
-            <h3>Math Tutor | Nanyang Educational Consultancy</h3>
-            <span class="date-tag">Jan 2025 – Present</span>
-            <p>Tutoring primary school students (P1 to P6) in mathematics. I design personalized lesson plans aligned with MOE syllabus requirements to drive visible grade improvements.</p>
+        <!-- UFINITY -->
+        <section class="narrative-section">
+          <h2 class="section-heading">Ufinity & SLS</h2>
+          <div class="text-bubble sls-bubble">
+            <p>
+              At Ufinity, I observe the tech behind Singapore's <strong>Student Learning Space (SLS)</strong>. 
+              Maintaining the tools thousands of students use daily has solidified my move: 
+              from maintaining the network to standing in the classroom.
+            </p>
           </div>
+        </section>
 
-          <div class="block timeline-item edu-item">
-            <h3>Badminton Coach | Extreme Badminton Academy</h3>
-            <span class="date-tag">June 2024 – Present</span>
-            <p>Active coaching responsibilities focusing on skill development, physical agility, and mental resilience for trainees.</p>
+        <section class="narrative-section">
+          <h2 class="section-heading">Interactive Tools</h2>
+          <CodePlayground />
+        </section>
+
+        <!-- GUESTBOOK -->
+        <section id="guestbook" class="narrative-section">
+          <h2 class="section-heading">Guestbook</h2>
+          <div class="block guestbook-box">
+            <div class="guestbook-form">
+              <input v-model="guestName" type="text" placeholder="Your Name" />
+              <textarea v-model="guestMessage" placeholder="Leave a message for the class..."></textarea>
+              <button @click="sendEntry" :disabled="sending">POST NOTE</button>
+            </div>
+            <div class="entries-list">
+              <div v-for="entry in entries" :key="entry.id" class="entry">
+                <span class="entry-date">{{ entry.date }}</span>
+                <h4>{{ entry.name }}</h4>
+                <p>{{ entry.message }}</p>
+              </div>
+            </div>
           </div>
-
-          <div class="block timeline-item edu-item inactive">
-            <h3>Piano Teacher | Freelance</h3>
-            <span class="date-tag">Previous Experience</span>
-            <p>Taught practical piano and foundational music theory to students, leveraging my Grade 7 credentials to foster expressive playing and technical discipline.</p>
-          </div>
-
-          <div class="block timeline-item edu-item inactive">
-            <h3>Badminton Coach | BG Academy</h3>
-            <span class="date-tag">Jan 2018 – Jan 2024</span>
-            <p>Dedicated six years to coaching students from children to adults, focusing on execution strategy and sports discipline.</p>
-          </div>
-        </div>
-
-        <!-- WORK EXPERIENCE -->
-        <div class="timeline-group">
-          <div class="marker-title">Software Engineering</div>
-          
-          <div class="block timeline-item">
-            <h3>Salesforce Engineer | Ufinity Pte Ltd</h3>
-            <span class="date-tag">Dec 2025 – Present</span>
-            <p>Current role focusing on cloud development, workflow automation, and enterprise software scaling.</p>
-          </div>
-
-          <div class="block timeline-item">
-            <h3>Full Stack Web Developer | Real Estate Analytics</h3>
-            <span class="date-tag">Feb 2024 – Dec 2025</span>
-            <p>Maintained company websites using Nuxt.js and Java Springboot. Developed a Python-backed chatbot and served as a cross-functional feature lead.</p>
-          </div>
-        </div>
-
-        <!-- INTERNSHIPS -->
-        <div class="timeline-group">
-          <div class="marker-title intern-marker">Internships and Education</div>
-          
-          <div class="block timeline-item intern-item">
-            <h3>Mobile Software Developer Intern | ACP Group</h3>
-            <span class="date-tag">June 2023 – Sept 2023</span>
-            <p>Sole mobile developer for the MyQueen app, built from scratch using Flutter and Firebase.</p>
-          </div>
-
-          <div class="block timeline-item intern-item">
-            <h3>BSc in Computer Science | University of London</h3>
-            <span class="date-tag">Oct 2021 – Dec 2023</span>
-            <p>Graduated with First Class Honors, building core foundations in web systems and logic.</p>
-          </div>
-
-          <div class="block timeline-item intern-item">
-            <h3>Data Analyst Intern | Monetary Authority of Singapore</h3>
-            <span class="date-tag">Feb 2018 – Aug 2018</span>
-            <p>Assisted in collecting and visualizing data to derive insights and support decision-making.</p>
-          </div>
-        </div>
-      </section>
-
-    </main>
+        </section>
+      </main>
+    </div>
   </NuxtLayout>
 </template>
 
 <script setup>
-const { data, pending } = await useFetch('/api/count')
+const isDark = ref(false)
+const toggleDarkMode = () => { isDark.value = !isDark.value }
+const { data: countData, pending: countPending } = await useFetch('/api/count')
+const guestName = ref(''); const guestMessage = ref(''); const sending = ref(false)
+const { data: entries, refresh } = await useFetch('/api/guestbook')
+const sendEntry = async () => {
+  if (!guestName.value || !guestMessage.value) return
+  sending.value = true
+  try {
+    await $fetch('/api/guestbook', { method: 'POST', body: { name: guestName.value, message: guestMessage.value } })
+    guestName.value = ''; guestMessage.value = ''; await refresh()
+  } catch (e) { alert('Error') } finally { sending.value = false }
+}
 </script>
 
 <style scoped>
-.page-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 60px 20px;
-}
+/* Color-coded markers for each stage */
+.timeline-item.poly .marker { background: #00bf63; }      /* RP Green */
+.timeline-item.secondary .marker { background: #6b7280; } /* Grey for Secondary */
+.timeline-item.academic .marker { background: #38bdf8; }  /* Blue for Uni */
 
-.whiteboard {
-  background: #fff;
-  border: 3px solid #000;
-  padding: 30px;
-  border-radius: 4px;
-  box-shadow: 4px 4px 0px #000;
-  margin-bottom: 40px;
-}
-
-h1 { font-size: 2.5rem; margin: 10px 0; font-weight: 900; color: #000; }
-.subtitle { color: #d90429; font-weight: 800; font-size: 0.9rem; text-transform: uppercase;}
-.bio { font-size: 1.15rem; line-height: 1.6; color: #333; font-weight: 500;}
-
-/* Terminal Styling */
-.terminal { background: #1a1a1a; color: #f4f4f5; border-radius: 4px; font-family: monospace; margin-top: 25px; }
-.term-bar { background: #333; padding: 8px 12px; display: flex; align-items: center; border-top-left-radius: 4px; border-top-right-radius: 4px; }
-.dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
-.dot.red { background: #ff3131; }
-.dot.yellow { background: #ffde59; }
-.dot.green { background: #00bf63; }
-.term-title { font-size: 0.75rem; color: #a1a1aa; margin-left: 5px; }
-.term-content { padding: 15px 20px; font-size: 0.85rem; }
-.prmpt { color: #00bf63; }
-.out { color: #a1a1aa; margin-left: 15px; margin-top: 4px; }
-.out.highlight { color: #ffde59; font-weight: 700; }
-
-/* Sticky Note Counter */
-.sticky-note {
-  background: #fffb96;
-  padding: 20px;
-  border: 2px solid #000;
-  box-shadow: 4px 4px 0px #000;
-  transform: rotate(-0.5deg);
-  margin-bottom: 50px;
-  max-width: 450px;
-}
-.sticky-note p { margin: 0; color: #000; font-size: 1.1rem; font-weight: 700; }
-.sticky-note span { color: #d90429; font-size: 1.3rem; }
-
-/* Narrative Sections */
-.narrative-section { margin-bottom: 60px; }
-h2 { font-size: 1.8rem; margin-bottom: 25px; color: #000; font-weight: 900; text-transform: uppercase;}
-
-.text-bubble {
-  background: #e2f1ff;
-  border: 3px solid #000;
-  padding: 25px;
-  border-radius: 4px;
-  box-shadow: 4px 4px 0px #000;
-  margin-bottom: 30px;
-}
-.text-bubble p { color: #000; font-size: 1.05rem; line-height: 1.6; font-weight: 500; margin: 0;}
-
-.narrative-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-}
-@media (min-width: 600px) { .narrative-grid { grid-template-columns: 1fr 1fr; } }
-
-.block { background: #fff; padding: 25px; border-radius: 4px; border: 3px solid #000; box-shadow: 4px 4px 0px #000; }
-.block h3 { margin-top: 0; font-size: 1.2rem; color: #000; font-weight: 800;}
-.block p { font-size: 0.95rem; color: #333; line-height: 1.6; }
-
-.dev-block { border-color: #00bf63; }
-.edu-block { border-color: #d90429; }
-.tutor-block { border-color: #ffde59; }    
-.academic-block { border-color: #38bdf8; } 
-.music-block { border-color: #8338ec; } /* Purple color for music */
-
-/* Timeline UI */
-.timeline-group {
-  margin-bottom: 40px;
-  border-left: 4px solid #000;
-  padding-left: 20px;
+/* Visual Path Styling */
+.timeline-container {
   position: relative;
+  padding-left: 40px;
+  border-left: 4px dashed var(--border);
+  margin-left: 15px;
 }
-
-.marker-title {
-  font-weight: 900;
-  background: #00bf63;
-  color: #fff;
-  padding: 5px 12px;
-  border-radius: 4px;
-  display: inline-block;
-  margin-bottom: 15px;
-  border: 2px solid #000;
-  box-shadow: 2px 2px 0px #000;
-}
-
-.marker-title.edu-marker { background: #d90429; }
-.marker-title.intern-marker { background: #38bdf8; color: #000; }
 
 .timeline-item {
-  background: #fff;
-  padding: 20px;
-  border-radius: 4px;
-  border: 3px solid #000;
-  box-shadow: 4px 4px 0px #000;
-  margin-bottom: 20px;
+  position: relative;
+  margin-bottom: 50px;
 }
-.timeline-item h3 { margin-top: 0; font-size: 1.1rem; color: #000; font-weight: 800;}
-.timeline-item p { font-size: 0.95rem; color: #333; line-height: 1.5; margin-top: 10px; }
+
+.marker {
+  position: absolute;
+  left: -53px;
+  top: 25px;
+  width: 22px;
+  height: 22px;
+  border: 4px solid var(--border);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.timeline-content {
+  padding: 25px !important;
+  transition: transform 0.3s ease;
+}
+
+.timeline-content:hover {
+  transform: translateX(10px);
+}
+
+.timeline-container {
+  position: relative;
+  padding-left: 30px;
+  border-left: 4px dashed var(--border);
+  margin-left: 10px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.marker {
+  position: absolute;
+  left: -41px;
+  top: 20px;
+  width: 18px;
+  height: 18px;
+  background: var(--accent);
+  border: 3px solid var(--border);
+  border-radius: 50%;
+}
+
+.timeline-content {
+  padding: 20px !important;
+}
 
 .date-tag {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #000;
-  background: #ffde59;
-  padding: 2px 6px;
-  border-radius: 2px;
-  display: inline-block;
-  margin-bottom: 5px;
-}
-
-.edu-item { border-color: #d90429; }
-.intern-item { border-color: #38bdf8; }
-
-/* Video Grid Styles */
-.video-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-@media (min-width: 600px) {
-  .video-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.video-card {
-  background: #fff;
-  border: 3px solid #000;
-  border-radius: 4px;
-  box-shadow: 4px 4px 0px #000;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.video-wrapper {
-  background: #1a1a1a;
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%; /* Forces 16:9 ratio */
-}
-
-.native-player {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.video-info {
-  padding: 15px;
-}
-
-.video-info h4 {
-  margin: 0 0 5px 0;
-  font-size: 1.1rem;
+  font-family: monospace;
   font-weight: 800;
-  color: #000;
+  background: var(--accent);
+  color: #fff;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  display: inline-block;
+  margin-bottom: 10px;
 }
 
-.video-info p {
+.timeline-item.academic .marker { background: #38bdf8; } /* Blue for Uni */
+.timeline-item.sports .marker { background: #fbbf24; }   /* Yellow for Coaching */
+
+.timeline-item h3 {
   margin: 0;
-  font-size: 0.9rem;
-  color: #52525b;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.timeline-item p {
+  margin-top: 10px;
+  font-size: 0.95rem;
   line-height: 1.5;
 }
 
-.placeholder-box {
-  background: #f3f4f6;
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%;
+/* THEME SETUP */
+.theme-wrapper {
+  --bg: #f3f4f6;
+  --text: #111827;
+  --accent: #d90429;
+  --paper: #ffffff;
+  --border: #111827;
+  --shadow: #111827;
+  --marker: #fff176;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 100vh;
+  color: var(--text);
+  background-color: var(--bg);
+  background-image: 
+    linear-gradient(var(--bg) 24px, #e5e7eb 25px),
+    linear-gradient(90deg, var(--bg) 24px, #e5e7eb 25px);
+  background-size: 25px 25px; /* Subtle graph paper */
+  font-family: 'ui-serif', 'Georgia', serif;
 }
 
-.placeholder-box span {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #a1a1aa;
-  font-weight: 700;
-  font-size: 0.9rem;
+.dark-mode {
+  --bg: #0f172a;
+  --text: #f8fafc;
+  --accent: #f87171;
+  --paper: #1e293b; 
+  --border: #f8fafc;
+  --shadow: #000000;
+  --marker: #4ade80;
 }
+
+.page-container { max-width: 850px; margin: 0 auto; padding: 40px 20px; }
+
+/* NAV & CHIPS */
+.top-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+.status-chip { 
+  background: var(--paper); border: 2px solid var(--border); padding: 6px 14px; 
+  font-family: monospace; font-size: 0.8rem; font-weight: bold; display: flex; align-items: center; gap: 8px;
+  box-shadow: 3px 3px 0 var(--shadow);
+}
+.pulse { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 0 #22c55e; animation: pulse 2s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } }
+
+.theme-btn { 
+  background: var(--border); color: var(--bg); border: 2px solid var(--border);
+  padding: 8px 18px; font-weight: 900; cursor: pointer; box-shadow: 4px 4px 0 var(--accent);
+  font-family: monospace; transition: transform 0.1s;
+}
+.theme-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--accent); }
+
+/* WHITEBOARD */
+.whiteboard { 
+  background: var(--paper); border: 4px solid var(--border); padding: 50px; 
+  box-shadow: 15px 15px 0 var(--shadow); margin-bottom: 60px; position: relative;
+}
+.tape-piece { width: 80px; height: 30px; background: rgba(0,0,0,0.1); position: absolute; }
+.top-left { top: -10px; left: -20px; transform: rotate(-45deg); background: rgba(217,4,41,0.2); }
+.top-right { top: -10px; right: -20px; transform: rotate(45deg); background: rgba(56,189,248,0.2); }
+
+.main-title { font-size: 5rem; font-weight: 900; margin: 0; line-height: 0.9; letter-spacing: -3px; }
+.subtitle { font-family: monospace; text-transform: uppercase; color: var(--accent); font-weight: 800; margin-bottom: 10px; }
+.bio { font-size: 1.5rem; line-height: 1.4; margin-top: 25px; max-width: 600px; }
+.highlight-yellow { background: var(--marker); color: #000; padding: 0 4px; }
+.highlight-red { border-bottom: 3px solid var(--accent); }
+
+/* TERMINAL */
+.terminal { background: #111; color: #eee; border-radius: 4px; font-family: 'Courier New', Courier, monospace; margin-top: 40px; border: 2px solid var(--border); }
+.term-bar { background: #222; padding: 10px; display: flex; align-items: center; border-bottom: 1px solid #444; }
+.dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; }
+.red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+.term-content { padding: 25px; line-height: 1.8; }
+.term-label { color: var(--accent); font-weight: bold; margin-right: 10px; }
+
+/* STICKY NOTE */
+.sticky-note { 
+  background: #fffb96; color: #111 !important; padding: 25px; border: 3px solid #111; 
+  box-shadow: 8px 8px 0 #111; transform: rotate(-2deg); max-width: 320px; margin-bottom: 60px; position: relative;
+}
+.pin { width: 15px; height: 15px; background: #ef4444; border-radius: 50%; position: absolute; top: -8px; left: 50%; transform: translateX(-50%); border: 2px solid #000; }
+.sticky-note span { font-weight: 900; font-size: 2rem; color: var(--accent); }
+
+/* BLOCKS */
+.section-heading { 
+  font-size: 2.2rem; background: var(--border); color: var(--bg); 
+  display: inline-block; padding: 8px 20px; margin-bottom: 40px; font-weight: 900;
+  box-shadow: 6px 6px 0 var(--accent);
+}
+.block { 
+  background: var(--paper); border: 4px solid var(--border); padding: 30px; 
+  box-shadow: 8px 8px 0 var(--shadow); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.block:hover { transform: translate(-4px, -4px); box-shadow: 14px 14px 0 var(--shadow); }
+.block-tag { font-family: monospace; font-size: 0.7rem; font-weight: 900; color: var(--accent); margin-bottom: 10px; }
+
+/* GRID FIX */
+.narrative-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+
+/* VIDEOS */
+.video-card { padding: 0 !important; overflow: hidden; }
+.video-wrapper { background: #000; position: relative; padding-top: 56.25%; }
+.native-player { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.video-info { padding: 20px; }
+
+/* GUESTBOOK */
+input, textarea { 
+  width: 100%; padding: 18px; border: 3px solid var(--border); 
+  background: var(--paper); color: var(--text); margin-bottom: 15px; font-family: inherit; font-size: 1rem;
+}
+.guestbook-form button { 
+  background: var(--accent); color: white; border: 3px solid var(--border);
+  padding: 12px 30px; font-weight: 900; cursor: pointer; box-shadow: 5px 5px 0 var(--shadow);
+}
+.entry { border-bottom: 2px dashed var(--border); padding: 25px 0; }
 </style>
