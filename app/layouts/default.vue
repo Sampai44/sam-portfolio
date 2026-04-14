@@ -10,11 +10,6 @@
         </div>
         
         <div class="nav-right">
-          <!-- <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#philosophy">Philosophy</a>
-            <a href="#experience">Experience</a>
-          </div> -->
 
           <!-- BIGGER PROFILE PICTURE TOP RIGHT -->
           <div class="avatar-box">
