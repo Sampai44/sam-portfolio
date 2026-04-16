@@ -101,6 +101,26 @@
       </div>
     </div>
 
+    <!-- Tutoring @ SAM -->
+    <div class="timeline-item intern">
+      <div class="marker"></div>
+      <div class="timeline-content block">
+        <span class="date-tag">Jan 2021 – March 2022</span>
+        <h3>Math Tutor @ Seriously Addictive Mathematics (SAM) </h3>
+       <p>Personalized coaching for P1-P6 students. Focused on grade improvement through logical deconstruction of math concepts.</p>
+      </div>
+    </div>
+
+      <!-- BG Badminton Academy -->
+    <div class="timeline-item intern">
+      <div class="marker"></div>
+      <div class="timeline-content block">
+        <span class="date-tag">Feb 2018 – Aug 2024</span>
+        <h3>Badminton Assistant Coach @ BG Badminton Academy </h3>
+        <p>Planned and carried out lessons for students of all ages, focusing on technical improvements.</p>
+      </div>
+    </div>
+
     <!-- INTERNSHIP: MAS -->
     <div class="timeline-item intern">
       <div class="marker"></div>
@@ -229,6 +249,9 @@
 </template>
 
 <script setup>
+import QrcodeVue from 'qrcode.vue'
+
+const whatsappUrl = 'https://wa.me'
 const isDark = ref(false)
 const toggleDarkMode = () => { isDark.value = !isDark.value }
 const { data: countData, pending: countPending } = await useFetch('/api/count')
@@ -245,6 +268,13 @@ const sendEntry = async () => {
 </script>
 
 <style scoped>
+
+.qr-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background: white;
+}
 /* Color-coded markers for each stage */
 .timeline-item.poly .marker { background: #00bf63; }      /* RP Green */
 .timeline-item.secondary .marker { background: #6b7280; } /* Grey for Secondary */
